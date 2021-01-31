@@ -11,6 +11,7 @@ import numpy as np
 import sklearn
 import category_encoders as ce
 import zipfile
+import os
 app = Flask(__name__)
 model = pickle.load(open('techncolabs_model.pkl', 'rb'))
 @app.route('/',methods=['GET'])
@@ -172,7 +173,7 @@ def predict():
         acoustic_vector_7 = float(request.form['acoustic_vector_7']) 
 
 
-        zf = zipfile.ZipFile('train_deployment_unscaled.zip') 
+        zf = zipfile.ZipFile(os.path.join('train_deployment_unscaled.zip')) 
         train1 = pd.read_csv(zf.open('train_deployment_unscaled.csv'))
         train=train1
         #train=scaler.fit_transform(train1.drop(["Unnamed: 0"],axis=1))
