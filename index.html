@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhistha Chatterjee Spotify Skip Prediction</title>
+</head>
+
+<body>
+
+    <div style="color:blue">
+        <form action="{{ url_for('predict')}}" method="post">
+            <h2>Spotify Skip Prediction by Abhistha Chatterjee</h2>
+            
+            </select>            
+            <h3>User liked to shuffle?</h3><br><select name="hist_user_behavior_is_shuffle" id="hist_user_behavior_is_shuffle" required="required">
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>
+
+            </select>            
+            <h3>User uses seekbar often?</h3><br><select name="hist_user_seek_behavior" id="hist_user_seek_behavior" required="required">
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>
+            
+            </select>                            
+            <h3>When is the user listening to the song?</h3><br><select name="time_of_day" id="time_of_day" required="required">
+                <option value="dawn">dawn</option>
+                <option value="early_morning">early_morning</option> 
+                <option value="morning">morning</option>
+                <option value="mid_morning">mid_morning</option>
+                <option value="noon">noon</option>
+                <option value="afternoon">afternoon</option>
+                <option value="evening">evening</option>
+                <option value="night">night</option>
+            </select>
+           
+            </select>                                      
+            <h3>What is the release condition of the song?</h3><br><select name="release_condition" id="release_condition" required="required">
+                <option value="very_old">very_old</option>
+                <option value="old">old</option>                  
+                <option value="relatively_old">relatively_old</option>
+                <option value="new">new</option> 
+                <option value="mordern">mordern</option>
+                <option value="latest">latest</option> 
+            </select>
+
+            <h3>What is the session position?(1-20)</h3>
+            <input id="session_position" name="session_position" type="number ">
+
+            <h3>What is the number of rows in session?(10-20)</h3>
+            <input id="session_length" name="session_length" type="number ">
+            
+            </select>            
+            <h3>Did the user change playlist between the previous song and the current song?</h3><br><select name="context_switch" id="context_switch" required="required">
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>            
+  
+            </select>
+            <h3>Did the user pause between the previous song and the current song?</h3><br><select name="no_pause_before_play" id="no_pause_before_play" required="required">
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>            
+            
+            <h3>How many times did the user used seekforward within the track?</h3>
+            <input id="hist_user_behavior_n_seekfwd" name="hist_user_behavior_n_seekfwd" type="number ">
+            
+            <h3>How many times did the user used seekback within the track?</h3>
+            <input id="hist_user_behavior_n_seekback" name="hist_user_behavior_n_seekback" type="number ">
+            
+            </select>
+            <h3>Was the user on premium?</h3><br><select name="premium" id="premium" required="required">
+                <option value="0">0</option>
+                <option value="1">1</option>
+            </select>            
+
+            </select>                                      
+            <h3>What type of context the playback occured within?</h3><br><select name="context_type" id="context_type" required="required">
+                <option value="user_collection">user_collection</option>
+                <option value="catalog">catalog</option>                  
+                <option value="editorial_playlist">editorial_playlist</option>
+                <option value="radio">radio</option> 
+                <option value="personalized_playlist">personalized_playlist</option>
+                <option value="charts">charts</option> 
+            </select>
+            
+            </select>                                      
+            <h3>What is the user action which led to the current track being played?</h3><br><select name="hist_user_behavior_reason_start" id="hist_user_behavior_reason_start" required="required">
+                <option value="fwdbtn">fwdbtn</option>
+                <option value="trackdone">trackdone</option>                  
+                <option value="clickrow">clickrow</option>
+                <option value="backbtn">backbtn</option> 
+                <option value="appload">appload</option>
+                <option value="playbtn">playbtn</option> 
+                <option value="remote">remote</option> 
+                <option value="trackerror">trackerror</option>
+                <option value="endplay">endplay</option> 
+            </select>
+            
+            </select>                                      
+            <h3>What is the user action which led to the current track being ended?</h3><br><select name="hist_user_behavior_reason_end" id="hist_user_behavior_reason_end" required="required">
+                <option value="fwdbtn">fwdbtn</option>
+                <option value="trackdone">trackdone</option>                  
+                <option value="clickrow">clickrow</option>
+                <option value="backbtn">backbtn</option> 
+                <option value="endplay">endplay</option>
+                <option value="logout">logout</option> 
+                <option value="remote">remote</option> 
+            </select>            
+            
+            <h3>Length of track in seconds?</h3>
+            <input id="duration" name="duration" type="number ">            
+            
+            <h3>What is the estimate of US Popularity percentile?(Eg:99.999974)</h3>
+            <input id="us_popularity_estimate" name="us_popularity_estimate" type="number "> 
+
+            <h3>How much acousticness does the track have?(0-0.99)</h3>
+            <input id="acousticness" name="acousticness" type="number "> 
+           
+            <h3>How strong the beat is?(0-0.99)</h3>
+            <input id="beat_strength" name="beat_strength" type="number ">
+             
+            <h3>How bouncy the track is?(0-0.99)</h3>
+            <input id="bounciness" name="bounciness" type="number "> 
+                       
+            <h3>How danceable the track is?(0-0.98)</h3>
+            <input id="danceability" name="danceability" type="number ">   
+                     
+            <h3>What is the mean dynamic range of the track?(0-32)</h3>
+            <input id="dyn_range_mean" name="dyn_range_mean" type="number ">
+                        
+            <h3>How energetic the track is?(0-0.99)</h3>
+            <input id="energy" name="energy" type="number ">            
+            
+            <h3>How much instrumentalness does the track have?(0-0.99)</h3>
+            <input id="instrumentalness" name="instrumentalness" type="number ">            
+            
+            <h3>What is the flatness quotient of the track?(0-1)</h3>
+            <input id="flatness" name="flatness" type="number ">
+            
+            <h3>What is the liveness quotient of the track?(0-0.99)</h3>
+            <input id="liveness" name="liveness" type="number ">            
+            
+            <h3>What is the loudness of the track in db?(-60 to +1.6)</h3>
+            <input id="loudness" name="loudness" type="number "> 
+                       
+            <h3>What is the mechanism qutient of the track?(0-1)</h3>
+            <input id="mechanism" name="mechanism" type="number ">            
+            
+            </select>                                      
+            <h3>What is the mode of the track?</h3><br><select name="mode" id="mode" required="required">
+                <option value="major">major</option>
+                <option value="minor">minor</option>                   
+            </select>          
+          
+            <h3>What is the organism qutient of the track?(0-0.96)</h3>
+            <input id="organism" name="organism" type="number ">          
+          
+            <h3>What is the speechiness qutient of the track?(0-0.96)</h3>
+            <input id="speechiness" name="speechiness" type="number ">          
+          
+            <h3>What is the tempo of the track?(0-219)</h3>
+            <input id="tempo" name="tempo" type="number ">
+            
+            <h3>What is the valence of the track?(0-0.99)</h3>
+            <input id="valence" name="valence" type="number ">            
+            
+            <h3>What is the acoustic_vector_0 of the track?(0-0.93)</h3>
+            <input id="acoustic_vector_0" name="acoustic_vector_0" type="number ">                      
+          
+            <h3>What is the acoustic_vector_1 of the track?(0-0.82)</h3>
+            <input id="acoustic_vector_1" name="acoustic_vector_1" type="number ">          
+          
+            <h3>What is the acoustic_vector_2 of the track?(0-0.60)</h3>
+            <input id="acoustic_vector_2" name="acoustic_vector_2" type="number ">          
+           
+            <h3>What is the acoustic_vector_3 of the track?(0-1.07)</h3>
+            <input id="acoustic_vector_3" name="acoustic_vector_3" type="number ">           
+           
+            <h3>What is the acoustic_vector_4 of the track?(0-0.89)</h3>
+            <input id="acoustic_vector_4" name="acoustic_vector_4" type="number ">           
+           
+            <h3>What is the acoustic_vector_5 of the track?(0-0.38)</h3>
+            <input id="acoustic_vector_5" name="acoustic_vector_5" type="number ">           
+           
+            <h3>What is the acoustic_vector_6 of the track?(0-0.99)</h3>
+            <input id="acoustic_vector_6" name="acoustic_vector_6" type="number ">           
+           
+            <h3>What is the acoustic_vector_7 of the track?(0-1.1)</h3>
+            <input id="acoustic_vector_7" name="acoustic_vector_7" type="number ">           
+          
+
+                            
+            <br><br><button id="sub" type="submit ">Predict Skip Status for given criterias</button>
+            <br>
+
+
+
+
+        </form>
+
+
+
+        <br><br><h3>{{ prediction_texts }}<h3>
+    </div>
+
+    <style>
+        body {
+            background-color: lightslategray;
+            text-align: center;
+            padding: 0px;
+        }
+        
+        #research {
+            font-size: 18px;
+            width: 100px;
+            height: 23px;
+            top: 23px;
+        }
+        
+        #box {
+            border-radius: 60px;
+            border-color: 45px;
+            border-style: solid;
+            font-family: cursive;
+            text-align: center;
+            background-color: rgb(168, 131, 61);
+            font-size: medium;
+            position: absolute;
+            width: 700px;
+            bottom: 9%;
+            height: 850px;
+            right: 30%;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+        }
+        
+        #hist_user_behavior_reason_end {
+            width: 83px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 20px;
+        }
+        
+        #hist_user_behavior_reason_end:hover {
+            background-color: coral;
+        }
+        #hist_user_behavior_reason_start {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #hist_user_behavior_reason_start:hover {
+            background-color: coral;
+        }
+
+        #mode {
+            width: 99px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #mode:hover {
+            background-color: coral;
+        }
+
+
+
+        #context_type {
+            width: 99px;
+            height: 43px;                           
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #context_type:hover {
+            background-color: coral;
+        }
+
+        #context_switch {
+            width: 99px;
+            height: 43px;                              
+            text-align: center;
+            border-radius: 14px;                    
+            font-size: 18px;
+        }
+        
+        #context_switch:hover {
+            background-color: coral;
+        }
+
+        #release_condition {
+            width: 99px;
+            height: 43px;                              
+            text-align: center;
+            border-radius: 14px;                                
+            font-size: 18px;
+        }
+        
+        #release_condition:hover {
+            background-color: coral;
+        }
+
+        #time_of_day {
+            width: 99px;
+            height: 43px;                              
+            text-align: center;
+            border-radius: 14px;                                
+            font-size: 18px;
+        }
+        
+        #time_of_day:hover {
+            background-color: coral;
+        }
+
+        #hist_user_seek_behavior {
+            width: 99px;
+            height: 43px;                              
+            text-align: center;
+            border-radius: 14px;                                
+            font-size: 18px;
+        }
+        
+        #hist_user_seek_behavior:hover {
+            background-color: coral;
+        }
+
+        #hist_user_behavior_is_shuffle {
+            width: 99px;
+            height: 43px;                              
+            text-align: center;
+            border-radius: 14px;                                
+            font-size: 18px;
+        }
+        
+        #hist_user_behavior_is_shuffle:hover {
+            background-color: coral;
+        }
+
+        #premium {
+            width: 120px;
+            height: 43px;
+            text-align: center;
+            border-radius: 14px;
+            font-size: 18px;
+        }
+        
+        #premium:hover {
+            background-color: darkcyan;
+        }
+        #no_pause_before_play {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        #no_pause_before_play:hover {
+            background-color: darkcyan;
+        }
+        
+        #acoustic_vector_7 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_6 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_5 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_4 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_3 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_2 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #acoustic_vector_1 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #acoustic_vector_0 {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+
+        #valence {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #tempo {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #speechiness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #organism {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #mechanism {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #loudness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #liveness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #flatness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #instrumentalness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #energy {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #dyn_range_mean {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;
+            text-align: center;
+        }
+        #danceability {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #bounciness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #beat_strength {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #acousticness {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #us_popularity_estimate {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+        #duration {
+            border-radius: 14px;
+            height: 25px;
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+        #hist_user_behavior_n_seekback {
+            border-radius: 14px;
+            height: 25px;hist_user_behavior_n_seekback
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+        #hist_user_behavior_n_seekfwd {
+            border-radius: 14px;
+            height: 25px;hist_user_behavior_n_seekback
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #session_length {
+            border-radius: 14px;
+            height: 25px;hist_user_behavior_n_seekback
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+        #session_position {
+            border-radius: 14px;
+            height: 25px;hist_user_behavior_n_seekback
+            font-size: 20px;dyn_range_mean
+            text-align: center;
+        }
+
+    </style>
+
+
+    
+</body>
+
+</html>
